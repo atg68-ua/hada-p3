@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="ProWeb.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        html{
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+        p{
+            text-align: center;
+        }
+        h1{
+            text-align:center;
+            color:white;
+            background-color:cadetblue;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <p>====== Adrián Tendero García - 23902208X ====== Jesús Parra García - 46086873W ======</p>
+            <h1>HADA P3 - CURSO 2023/24</h1>
+            <asp:ContentPlaceHolder ID="formulario" runat="server">
+            </asp:ContentPlaceHolder>
+            <br>
+            <asp:ContentPlaceHolder ID="botones" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
