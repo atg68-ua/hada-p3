@@ -3,5 +3,6 @@ hada-p3/bin/
 hada-p3/obj/
 ProWeb/bin/
 ProWeb/obj/
+ProWeb/App_Data/
 Library/bin/
 Library/obj/
