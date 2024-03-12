@@ -16,18 +16,18 @@
     <asp:SqlDataSource ID="categoryNames" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [name] FROM [Categories]"></asp:SqlDataSource>
     <br><br>
     <asp:Label ID="PriceLabel" runat="server">Price</asp:Label>
-    <asp:TextBox ID="PriceTextBox" runat="server"></asp:TextBox>
+    <asp:TextBox ID="PriceTextBox" runat="server" OnTextChanged="PriceTextBox_TextChanged"></asp:TextBox>
     <br><br>
     <asp:Label ID="DateLabel" runat="server">Date Creation</asp:Label>
     <asp:TextBox  ID="DateTextBox" runat="server"></asp:TextBox>
     <br>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="botones" runat="server">
-    <asp:Button ID="CreateButton" text="Create" runat="server"/>
-    <asp:Button ID="UpdateButton" text="Update" runat="server"/>
-    <asp:Button ID="DeleteButton" text="Delete" runat="server"/>
-    <asp:Button ID="ReadButton" text="Read" runat="server"/>
-    <asp:Button ID="ReadFirstButton" text="Read First" runat="server"/>
-    <asp:Button ID="ReadPrevButton" text="Read Prev" runat="server"/>
-    <asp:Button ID="ReadNextButton" text="Read Next" runat="server"/>
+    <asp:Button ID="CreateButton" text="Create" runat="server" OnClick="CreateButton_Click"/>
+    <asp:Button ID="UpdateButton" text="Update" runat="server" OnClick="UpdateButton_Click"/>
+    <asp:Button ID="DeleteButton" text="Delete" runat="server" OnClick="DeleteButton_Click"/>
+    <asp:Button ID="ReadButton" text="Read" runat="server" OnClick="ReadButton_Click"/>
+    <asp:Button ID="ReadFirstButton" text="Read First" runat="server" OnClick="ReadFirstButton_Click"/>
+    <asp:Button ID="ReadPrevButton" text="Read Prev" runat="server" OnClick="ReadPrevButton_Click"/>
+    <asp:Button ID="ReadNextButton" text="Read Next" runat="server" OnClick="ReadNextButton_Click"/>
 </asp:Content>

@@ -13,8 +13,37 @@ namespace ProWeb
         {
 
         }
+        protected void CreateButton_Click(object sender, EventArgs e)
+        {
+            
+        }
 
-        protected void DateCreation_SelectionChanged(object sender, EventArgs e)
+        protected void UpdateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DeleteButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReadButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReadFirstButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReadPrevButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReadNextButton_Click(object sender, EventArgs e)
         {
 
         }
