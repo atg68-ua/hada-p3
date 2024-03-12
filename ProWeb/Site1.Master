@@ -34,6 +34,9 @@
             <br>
             <asp:ContentPlaceHolder ID="botones" runat="server">
             </asp:ContentPlaceHolder>
+            <br>
+            <asp:ContentPlaceHolder ID="Message" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
     </form>
 </body>

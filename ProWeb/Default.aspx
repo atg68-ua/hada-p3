@@ -16,7 +16,7 @@
     <asp:SqlDataSource ID="categoryNames" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [name] FROM [Categories]"></asp:SqlDataSource>
     <br><br>
     <asp:Label ID="PriceLabel" runat="server">Price</asp:Label>
-    <asp:TextBox ID="PriceTextBox" runat="server" OnTextChanged="PriceTextBox_TextChanged"></asp:TextBox>
+    <asp:TextBox ID="PriceTextBox" runat="server"></asp:TextBox>
     <br><br>
     <asp:Label ID="DateLabel" runat="server">Date Creation</asp:Label>
     <asp:TextBox  ID="DateTextBox" runat="server"></asp:TextBox>
@@ -30,4 +30,7 @@
     <asp:Button ID="ReadFirstButton" text="Read First" runat="server" OnClick="ReadFirstButton_Click"/>
     <asp:Button ID="ReadPrevButton" text="Read Prev" runat="server" OnClick="ReadPrevButton_Click"/>
     <asp:Button ID="ReadNextButton" text="Read Next" runat="server" OnClick="ReadNextButton_Click"/>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="Message" runat="server">
+    <asp:Label ID="MsgLabel" runat="server"></asp:Label>
 </asp:Content>

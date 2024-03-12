@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Library;
 
 namespace ProWeb
 {
@@ -15,7 +16,11 @@ namespace ProWeb
         }
         protected void CreateButton_Click(object sender, EventArgs e)
         {
-            
+            CADProduct product = new CADProduct();
+            if(true)
+            {
+                this.MsgLabel.Text = "Perfecto";
+            }
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
