@@ -15,11 +15,18 @@ namespace ProWeb
 
         }
         protected void CreateButton_Click(object sender, EventArgs e)
-        {
-            CADProduct product = new CADProduct();
-            if(true)
+        { 
+            try
             {
-                this.MsgLabel.Text = "Perfecto";
+                CADProduct product = new CADProduct();
+                product.Create(new ENProduct(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTime.Parse(DateTextBox.Text)));
+                Console.WriteLine("Product created!!");
+                MsgLabel.Text = "Product created!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
+                MsgLabel.Text = "Something went wrong";
             }
         }
 
