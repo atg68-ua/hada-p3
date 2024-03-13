@@ -8,22 +8,37 @@ namespace Library
 {
     public class ENProduct
     {
-        private string code { get; }
-        private string name { get; }
-        private int amount { get; }
-        private float price { get; }
-        private DateTime creationDate { get; }
+        private string _code;
+        private string _name;
+        private int _amount;
+        private float _price;
+        private int _category;
+        private DateTime _creationDate;
+        public string Code { get; }
+        public string Name { get; }
+        public int Amount { get; }
+        public float Price { get; }
+        public int Category { get; }
+        public DateTime CreationDate { get; }
         public ENProduct()
         {
 
         }
-        public ENProduct(string code, string name, int amount, float price, DateTime creationDate)
+        public ENProduct(string code, string name, int amount, float price, int category, DateTime creationDate)
         {
-            this.code = code;
-            this.name = name;
-            this.amount = amount;
-            this.price = amount;
-            this.creationDate = creationDate;
+            this._code = code;
+            this._name = name;
+            this._amount = amount;
+            this._price = price;
+            this._category = category;
+            this._creationDate = creationDate;
+
+            Code = this._code;
+            Name = this._name;
+            Amount = this._amount;
+            Price = this._price;
+            Category = this._category;
+            CreationDate = this._creationDate;
         }
         public bool Create()
         {

@@ -19,7 +19,7 @@ namespace ProWeb
             try
             {
                 CADProduct product = new CADProduct();
-                product.Create(new ENProduct(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTime.Parse(DateTextBox.Text)));
+                //product.Create(new ENProduct(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTime.Parse(DateTextBox.Text)));
                 Console.WriteLine("Product created!!");
                 MsgLabel.Text = "Product created!!";
             }
