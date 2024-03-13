@@ -48,12 +48,36 @@ namespace ProWeb
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
+                CADProduct product = new CADProduct();
+                product.Update(pr);
+                Console.WriteLine("Product updated!!");
+                MsgLabel.Text = "Product updated!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
+                MsgLabel.Text = "Something went wrong";
+            }
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
+                CADProduct product = new CADProduct();
+                product.Delete(pr);
+                Console.WriteLine("Product deleted!!");
+                MsgLabel.Text = "Product deleted!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
+                MsgLabel.Text = "Something went wrong";
+            }
         }
 
         protected void ReadButton_Click(object sender, EventArgs e)
