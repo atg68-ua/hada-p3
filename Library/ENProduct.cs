@@ -14,12 +14,30 @@ namespace Library
         private float _price;
         private int _category;
         private DateTime _creationDate;
-        public string Code { get; }
-        public string Name { get; }
-        public int Amount { get; }
-        public float Price { get; }
-        public int Category { get; }
-        public DateTime CreationDate { get; }
+        public string Code
+        {
+            get { return _code; }
+        }
+        public string Name
+        {
+            get { return _name; }
+        }
+        public int Amount
+        {
+            get { return _amount; }
+        }
+        public float Price
+        {
+            get { return _price; }
+        }
+        public int Category
+        {
+            get { return _category; }
+        }
+        public DateTime CreationDate
+        {
+            get { return _creationDate; }
+        }
         public ENProduct()
         {
 
@@ -32,13 +50,6 @@ namespace Library
             this._price = price;
             this._category = category;
             this._creationDate = creationDate;
-
-            Code = this._code;
-            Name = this._name;
-            Amount = this._amount;
-            Price = this._price;
-            Category = this._category;
-            CreationDate = this._creationDate;
         }
         public bool Create()
         {
