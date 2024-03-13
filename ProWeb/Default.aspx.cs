@@ -23,7 +23,7 @@ namespace ProWeb
             if (price < 0 || price >= MAX_PRICE) throw new ArgumentException();
             if (!DateTime.TryParseExact(creationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt)) throw new ArgumentException();
 
-            return new ENProduct(code, name,  amount, price, dt);
+            return new ENProduct(code, name,  amount, price, 1, dt);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
