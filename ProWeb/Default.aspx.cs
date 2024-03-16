@@ -17,17 +17,30 @@ namespace ProWeb
         private const double MAX_PRICE = 9999.99;
         private ENProduct correctData(string code, string name, int amount, float price, string creationDate)
         {
-            if (code.Length < 1 || code.Length > MAX_CODE) throw new ArgumentException();
-            if (name.Length <= MAX_NAME) throw new ArgumentException();
-            if (amount < 0 || amount >= MAX_AMOUNT) throw new ArgumentException();
-            if (price < 0 || price >= MAX_PRICE) throw new ArgumentException();
-            if (!DateTime.TryParseExact(creationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt)) throw new ArgumentException();
+            if (code.Length < 1 || code.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
+            if (name.Length >= MAX_NAME) throw new ArgumentException("incorrect name format");
+            if (amount < 0 || amount >= MAX_AMOUNT) throw new ArgumentException("incorrect amount format");
+            if (price < 0 || price >= MAX_PRICE) throw new ArgumentException("incorrect price format");
+            if (!DateTime.TryParseExact(creationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt)) throw new ArgumentException("incorrect date format");
 
-            return new ENProduct(code, name,  amount, price, 1, dt);
+            return new ENProduct(code, name,  amount, price, int.Parse(CategoryList.SelectedValue), dt);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                LoadCategories();
+            }
+        }
+        private void LoadCategories()
+        {
+            CADCategory cad = new CADCategory();
+            List<ENCategory> categorias = cad.readAll();
 
+            CategoryList.DataSource = categorias;
+            CategoryList.DataTextField = "name";
+            CategoryList.DataValueField = "id";
+            CategoryList.DataBind();
         }
         protected void CreateButton_Click(object sender, EventArgs e)
         {
@@ -42,7 +55,7 @@ namespace ProWeb
             catch (Exception ex)
             {
                 Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
-                MsgLabel.Text = "Something went wrong";
+                MsgLabel.Text = "Something went wrong. ERROR:" + ex.Message;
             }
         }
 

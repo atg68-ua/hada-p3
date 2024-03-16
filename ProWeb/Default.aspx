@@ -12,8 +12,7 @@
     <asp:TextBox ID="AmountTextBox" runat="server"></asp:TextBox>
     <br><br>
     <asp:Label ID="CategoryLabel" runat="server">Category</asp:Label>
-    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="categoryNames" DataTextField="name" DataValueField="name"></asp:DropDownList>
-    <asp:SqlDataSource ID="categoryNames" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [name] FROM [Categories]"></asp:SqlDataSource>
+    <asp:DropDownList ID="CategoryList" runat="server"></asp:DropDownList>
     <br><br>
     <asp:Label ID="PriceLabel" runat="server">Price</asp:Label>
     <asp:TextBox ID="PriceTextBox" runat="server"></asp:TextBox>

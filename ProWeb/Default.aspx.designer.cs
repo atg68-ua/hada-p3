@@ -78,22 +78,13 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.Label CategoryLabel;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control CategoryList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-
-        /// <summary>
-        /// Control categoryNames.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource categoryNames;
+        protected global::System.Web.UI.WebControls.DropDownList CategoryList;
 
         /// <summary>
         /// Control PriceLabel.
