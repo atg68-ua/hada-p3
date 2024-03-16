@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using System.Data;
+using System.Configuration;
 
 namespace Library
 {
@@ -14,13 +16,13 @@ namespace Library
         private string constring { get; }
         public CADProduct()
         {
-            constring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";
+            constring = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
         }
         public bool Create(ENProduct en)
         {
+            SqlConnection connection = new SqlConnection(constring);
             try
             {
-                SqlConnection connection = new SqlConnection(constring);
                 connection.Open();
 
                 SqlCommand command = new SqlCommand(null, connection);
@@ -58,6 +60,10 @@ namespace Library
             {
                 Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
                 return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
             }
         }
         public bool Update(ENProduct en)

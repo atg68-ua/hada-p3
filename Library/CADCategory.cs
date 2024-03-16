@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data.Common;
+using System.Configuration;
 
 namespace Library
 {
@@ -15,16 +16,16 @@ namespace Library
         private string constring { get; }
         public CADCategory()
         {
-            constring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";
+            constring = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
         }
         public bool Read(ENCategory en)
         {
+            SqlConnection connection = new SqlConnection(constring);
             try
             {
-                SqlConnection connection = new SqlConnection(constring);
                 connection.Open();
-                SqlCommand command = new SqlCommand(null, connection);
 
+                SqlCommand command = new SqlCommand(null, connection);
                 command.CommandText = "SELECT name FROM [dbo].[Category] WHERE name=(@name)";
                 SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 32);
                 nameParam.Value = en.Name;
@@ -41,22 +42,24 @@ namespace Library
                 Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
                 return false;
             }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         public List<ENCategory> readAll()
         {
+            SqlConnection connection = new SqlConnection(constring);
             try
             {
                 List<ENCategory> valores = new List<ENCategory>();
-                SqlConnection connection = new SqlConnection(constring);
                 connection.Open();
                 SqlCommand command = new SqlCommand("SELECT name, id FROM [dbo].[Categories]", connection);
 
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
-                {
                     valores.Add(new ENCategory(reader.GetString(0), reader.GetInt32(1)));
-                }
                 
                 connection.Close();
                 return valores; 
@@ -65,6 +68,10 @@ namespace Library
             {
                 Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
                 return new List<ENCategory>();
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
             }
         }
     }
