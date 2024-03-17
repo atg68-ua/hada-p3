@@ -68,11 +68,85 @@ namespace Library
         }
         public bool Update(ENProduct en)
         {
-            return true;
+            SqlConnection connection = new SqlConnection(constring);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(null, connection);
+
+                command.CommandText = "UPDATE [dbo].[Products] " +
+                    "SET name=@name, amount=@amount, price=@price, category=@category, creationDate=@creationDate " +
+                    "WHERE code=@code";
+
+                SqlParameter codeParam = new SqlParameter("@code", SqlDbType.NVarChar, 16);
+                SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 32);
+                SqlParameter amountParam = new SqlParameter("@amount", SqlDbType.Int);
+                SqlParameter priceParam = new SqlParameter("@price", SqlDbType.Float);
+                SqlParameter categoryParam = new SqlParameter("@category", SqlDbType.Int);
+                SqlParameter creationDateParam = new SqlParameter("@creationDate", SqlDbType.DateTime);
+
+                codeParam.Value = en.Code;
+                nameParam.Value = en.Name;
+                amountParam.Value = en.Amount;
+                priceParam.Value = en.Price;
+                categoryParam.Value = en.Category;
+                creationDateParam.Value = en.CreationDate;
+
+                command.Parameters.Add(codeParam);
+                command.Parameters.Add(nameParam);
+                command.Parameters.Add(amountParam);
+                command.Parameters.Add(priceParam);
+                command.Parameters.Add(categoryParam);
+                command.Parameters.Add(creationDateParam);
+
+                command.Prepare();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         public bool Delete(ENProduct en)
         {
-            return true;
+            SqlConnection connection = new SqlConnection(constring);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(null, connection);
+
+                command.CommandText = "DELETE FROM [dbo].[Products] " +
+                    "WHERE code=@code";
+
+                SqlParameter codeParam = new SqlParameter("@code", SqlDbType.NVarChar, 16);
+
+                codeParam.Value = en.Code;
+
+                command.Parameters.Add(codeParam);
+
+                command.Prepare();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         public bool Read(ENProduct en)
         {
