@@ -158,12 +158,7 @@ namespace Library
                 SqlCommand command = new SqlCommand(null, connection);
 
                 command.CommandText = "SELECT * FROM [dbo].[Products] " +
-                    "WHERE code=@code " +
-                    "AND name=@name" +
-                    "AND amount=@amount " +
-                    "AND price=@price " +
-                    "AND category=@category " +
-                    "AND creationDate=@creationDate";
+                    "WHERE code=@code";
 
                 SqlParameter codeParam = new SqlParameter("@code", SqlDbType.NVarChar, 16);
                 SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 32);
@@ -187,7 +182,16 @@ namespace Library
                 command.Parameters.Add(creationDateParam);
 
                 command.Prepare();
-                command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+
+                en.Name = en.Code = reader["name"].ToString();
+                en.Code = reader["code"].ToString();
+                en.Amount = int.Parse(reader["amount"].ToString());
+                en.Price = float.Parse(reader["price"].ToString());
+                en.Category = int.Parse(reader["category"].ToString());
+                en.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
+
                 connection.Close();
                 return true;
             }

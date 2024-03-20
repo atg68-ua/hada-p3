@@ -100,9 +100,16 @@ namespace ProWeb
         {
             try
             {
-                ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
+                if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
+                ENProduct pr = new ENProduct();
+                pr.Code = CodeTextBox.Text;
                 CADProduct product = new CADProduct();
                 product.Read(pr);
+                NameTextBox.Text = pr.Name;
+                AmountTextBox.Text = pr.Amount.ToString();
+                PriceTextBox.Text = pr.Price.ToString();
+                CategoryList.SelectedIndex = pr.Category;
+                DateTextBox.Text = pr.CreationDate.ToString();
                 Console.WriteLine("Done!!");
                 MsgLabel.Text = "Done!!";
             }
