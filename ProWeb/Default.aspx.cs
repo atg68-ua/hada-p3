@@ -15,6 +15,7 @@ namespace ProWeb
         private const int MAX_NAME = 16;
         private const int MAX_AMOUNT = 9999;
         private const double MAX_PRICE = 9999.99;
+        private const string errMsg = "User operation has failed. Error: ";
         private ENProduct correctData(string code, string name, int amount, float price, string creationDate)
         {
             if (code.Length < 1 || code.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
@@ -54,8 +55,8 @@ namespace ProWeb
             }
             catch (Exception ex)
             {
-                Console.WriteLine("User operation has failed. Error: " + ex.Message);
-                MsgLabel.Text = "User operation has failed. Error: " + ex.Message;
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
             }
         }
 
@@ -71,8 +72,8 @@ namespace ProWeb
             }
             catch (Exception ex)
             {
-                Console.WriteLine("User operation has failed. Error: " + ex.Message);
-                MsgLabel.Text = "User operation has failed. Error: " + ex.Message;
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
             }
         }
 
@@ -81,21 +82,35 @@ namespace ProWeb
             try
             {
                 if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
-                ENProduct pr = new ENProduct(CodeTextBox.Text, "", 0, 0, 0, DateTime.Now); CADProduct product = new CADProduct();
+                ENProduct pr = new ENProduct();
+                pr.Code = CodeTextBox.Text;
+                CADProduct product = new CADProduct();
                 product.Delete(pr);
                 Console.WriteLine("Product deleted!!");
                 MsgLabel.Text = "Product deleted!!";
             }
             catch (Exception ex)
             {
-                Console.WriteLine("User operation has failed. Error: " + ex.Message);
-                MsgLabel.Text = "User operation has failed. Error: " + ex.Message;
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
             }
         }
 
         protected void ReadButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
+                CADProduct product = new CADProduct();
+                product.Read(pr);
+                Console.WriteLine("Done!!");
+                MsgLabel.Text = "Done!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
+            }
         }
 
         protected void ReadFirstButton_Click(object sender, EventArgs e)

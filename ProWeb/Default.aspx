@@ -30,6 +30,8 @@
     <asp:Button ID="ReadPrevButton" text="Read Prev" runat="server" OnClick="ReadPrevButton_Click"/>
     <asp:Button ID="ReadNextButton" text="Read Next" runat="server" OnClick="ReadNextButton_Click"/>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="Message" runat="server">
+<asp:Content ID="Content4" ContentPlaceHolderID="Output" runat="server">
+    <asp:Label ID="OutputLabel" runat="server"></asp:Label>
+    <br>
     <asp:Label ID="MsgLabel" runat="server"></asp:Label>
 </asp:Content>
