@@ -46,7 +46,12 @@ namespace Library
         }
         public ENProduct()
         {
-
+            _code = "00000";
+            _name = "";
+            _amount = 0;
+            _price = 0;
+            _category = 0;
+            _creationDate = DateTime.Now;
         }
         public ENProduct(string code, string name, int amount, float price, int category, DateTime creationDate)
         {
