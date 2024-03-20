@@ -54,8 +54,8 @@ namespace ProWeb
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
-                MsgLabel.Text = "Something went wrong. ERROR:" + ex.Message;
+                Console.WriteLine("User operation has failed. Error: " + ex.Message);
+                MsgLabel.Text = "User operation has failed. Error: " + ex.Message;
             }
         }
 
@@ -71,8 +71,8 @@ namespace ProWeb
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
-                MsgLabel.Text = "Something went wrong";
+                Console.WriteLine("User operation has failed. Error: " + ex.Message);
+                MsgLabel.Text = "User operation has failed. Error: " + ex.Message;
             }
         }
 
@@ -80,16 +80,16 @@ namespace ProWeb
         {
             try
             {
-                ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
-                CADProduct product = new CADProduct();
+                if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
+                ENProduct pr = new ENProduct(CodeTextBox.Text, "", 0, 0, 0, DateTime.Now); CADProduct product = new CADProduct();
                 product.Delete(pr);
                 Console.WriteLine("Product deleted!!");
                 MsgLabel.Text = "Product deleted!!";
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong. ERROR: " + ex.Message);
-                MsgLabel.Text = "Something went wrong";
+                Console.WriteLine("User operation has failed. Error: " + ex.Message);
+                MsgLabel.Text = "User operation has failed. Error: " + ex.Message;
             }
         }
 
