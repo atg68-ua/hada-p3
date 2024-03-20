@@ -17,30 +17,41 @@ namespace Library
         public string Code
         {
             get { return _code; }
+            set { _code = value; }
         }
         public string Name
         {
             get { return _name; }
+            set { _name = value; }
         }
         public int Amount
         {
             get { return _amount; }
+            set { _amount = value; }
         }
         public float Price
         {
             get { return _price; }
+            set { _price = value; }
         }
         public int Category
         {
             get { return _category; }
+            set { _category = value; }
         }
         public DateTime CreationDate
         {
             get { return _creationDate; }
+            set { _creationDate = value; }
         }
         public ENProduct()
         {
-
+            _code = "00000";
+            _name = "";
+            _amount = 0;
+            _price = 0;
+            _category = 0;
+            _creationDate = DateTime.Now;
         }
         public ENProduct(string code, string name, int amount, float price, int category, DateTime creationDate)
         {

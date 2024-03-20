@@ -150,19 +150,125 @@ namespace Library
         }
         public bool Read(ENProduct en)
         {
-            return true;
+            SqlConnection connection = new SqlConnection(constring);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(null, connection);
+
+                command.CommandText = "SELECT * FROM [dbo].[Products] " +
+                    "WHERE code=@code " +
+                    "AND name=@name" +
+                    "AND amount=@amount " +
+                    "AND price=@price " +
+                    "AND category=@category " +
+                    "AND creationDate=@creationDate";
+
+                SqlParameter codeParam = new SqlParameter("@code", SqlDbType.NVarChar, 16);
+                SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 32);
+                SqlParameter amountParam = new SqlParameter("@amount", SqlDbType.Int);
+                SqlParameter priceParam = new SqlParameter("@price", SqlDbType.Float);
+                SqlParameter categoryParam = new SqlParameter("@category", SqlDbType.Int);
+                SqlParameter creationDateParam = new SqlParameter("@creationDate", SqlDbType.DateTime);
+
+                codeParam.Value = en.Code;
+                nameParam.Value = en.Name;
+                amountParam.Value = en.Amount;
+                priceParam.Value = en.Price;
+                categoryParam.Value = en.Category;
+                creationDateParam.Value = en.CreationDate;
+
+                command.Parameters.Add(codeParam);
+                command.Parameters.Add(nameParam);
+                command.Parameters.Add(amountParam);
+                command.Parameters.Add(priceParam);
+                command.Parameters.Add(categoryParam);
+                command.Parameters.Add(creationDateParam);
+
+                command.Prepare();
+                command.ExecuteReader();
+                connection.Close();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         public bool ReadFirst(ENProduct en)
         {
-            return true;
+            SqlConnection connection = new SqlConnection(constring);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(null, connection);
+
+                command.CommandText = "SELECT * FROM [dbo].[Products] ORDER BY id LIMIT 1";
+
+                command.Prepare();
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+
+                en.Name = en.Code = reader["name"].ToString();
+                en.Code = reader["code"].ToString();
+                en.Amount = int.Parse(reader["amount"].ToString());
+                en.Price = float.Parse(reader["price"].ToString());
+                en.Category = int.Parse(reader["category"].ToString());
+                en.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
+
+                connection.Close();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         public bool ReadNext(ENProduct en)
         {
-            return true;
+            SqlConnection connection = new SqlConnection(constring);
+            try
+            {
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         public bool ReadPrev(ENProduct en)
         {
-            return true;
+            SqlConnection connection = new SqlConnection(constring);
+            try
+            {
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
     }
 }
