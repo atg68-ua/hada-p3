@@ -230,7 +230,36 @@ namespace Library
             SqlConnection connection = new SqlConnection(constring);
             try
             {
-                return true;
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(null, connection);
+
+                command.CommandText = "SELECT * FROM [dbo].[Products] ORDER BY id";
+
+                command.Prepare();
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+
+                bool found = false;
+
+                while (reader.Read())
+                {
+                    if (reader["code"].ToString() == en.Code)
+                        found = true;
+                    break;
+                }
+
+                if (found && reader.Read())
+                {
+                    en.Name = reader["name"].ToString();
+                    en.Code = reader["code"].ToString();
+                    en.Amount = int.Parse(reader["amount"].ToString());
+                    en.Price = float.Parse(reader["price"].ToString());
+                    en.Category = int.Parse(reader["category"].ToString());
+                    en.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
+                    return true;
+                }
+                return false;
             }
             catch (SqlException ex)
             {
@@ -247,7 +276,46 @@ namespace Library
             SqlConnection connection = new SqlConnection(constring);
             try
             {
-                return true;
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(null, connection);
+
+                command.CommandText = "SELECT * FROM [dbo].[Products] ORDER BY id";
+
+                command.Prepare();
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+
+                ENProduct prev = new ENProduct();
+                bool found = false;
+
+                while (reader.Read())
+                {
+                    if (reader["code"].ToString() == en.Code)
+                    {
+                        found = true;
+                        break;
+                    }
+
+                    prev.Name = reader["name"].ToString();
+                    prev.Code = reader["code"].ToString();
+                    prev.Amount = int.Parse(reader["amount"].ToString());
+                    prev.Price = float.Parse(reader["price"].ToString());
+                    prev.Category = int.Parse(reader["category"].ToString());
+                    prev.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
+                }
+
+                if (found)
+                {
+                    en.Name = prev.Name;
+                    en.Code = prev.Code;
+                    en.Amount = prev.Amount;
+                    en.Price = prev.Price;
+                    en.Category = prev.Category;
+                    en.CreationDate = prev.CreationDate;
+                    return true;
+                }
+                return false;
             }
             catch (SqlException ex)
             {
