@@ -161,31 +161,16 @@ namespace Library
                     "WHERE code=@code";
 
                 SqlParameter codeParam = new SqlParameter("@code", SqlDbType.NVarChar, 16);
-                SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 32);
-                SqlParameter amountParam = new SqlParameter("@amount", SqlDbType.Int);
-                SqlParameter priceParam = new SqlParameter("@price", SqlDbType.Float);
-                SqlParameter categoryParam = new SqlParameter("@category", SqlDbType.Int);
-                SqlParameter creationDateParam = new SqlParameter("@creationDate", SqlDbType.DateTime);
 
                 codeParam.Value = en.Code;
-                nameParam.Value = en.Name;
-                amountParam.Value = en.Amount;
-                priceParam.Value = en.Price;
-                categoryParam.Value = en.Category;
-                creationDateParam.Value = en.CreationDate;
 
                 command.Parameters.Add(codeParam);
-                command.Parameters.Add(nameParam);
-                command.Parameters.Add(amountParam);
-                command.Parameters.Add(priceParam);
-                command.Parameters.Add(categoryParam);
-                command.Parameters.Add(creationDateParam);
 
                 command.Prepare();
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
 
-                en.Name = en.Code = reader["name"].ToString();
+                en.Name = reader["name"].ToString();
                 en.Code = reader["code"].ToString();
                 en.Amount = int.Parse(reader["amount"].ToString());
                 en.Price = float.Parse(reader["price"].ToString());
@@ -220,7 +205,7 @@ namespace Library
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
 
-                en.Name = en.Code = reader["name"].ToString();
+                en.Name = reader["name"].ToString();
                 en.Code = reader["code"].ToString();
                 en.Amount = int.Parse(reader["amount"].ToString());
                 en.Price = float.Parse(reader["price"].ToString());
