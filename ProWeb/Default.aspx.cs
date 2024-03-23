@@ -16,6 +16,15 @@ namespace ProWeb
         private const int MAX_AMOUNT = 9999;
         private const double MAX_PRICE = 9999.99;
         private const string errMsg = "User operation has failed. Error: ";
+        private void showProduct(ENProduct pr)
+        {
+            CodeTextBox.Text = pr.Code;
+            NameTextBox.Text = pr.Name;
+            AmountTextBox.Text = pr.Amount.ToString();
+            PriceTextBox.Text = pr.Price.ToString();
+            CategoryList.SelectedIndex = pr.Category;
+            DateTextBox.Text = pr.CreationDate.ToString();
+        }
         private ENProduct correctData(string code, string name, int amount, float price, string creationDate)
         {
             if (code.Length < 1 || code.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
@@ -105,11 +114,7 @@ namespace ProWeb
                 pr.Code = CodeTextBox.Text;
                 CADProduct product = new CADProduct();
                 product.Read(pr);
-                NameTextBox.Text = pr.Name;
-                AmountTextBox.Text = pr.Amount.ToString();
-                PriceTextBox.Text = pr.Price.ToString();
-                CategoryList.SelectedIndex = pr.Category;
-                DateTextBox.Text = pr.CreationDate.ToString();
+                showProduct(pr);
                 Console.WriteLine("Done!!");
                 MsgLabel.Text = "Done!!";
             }
@@ -122,17 +127,60 @@ namespace ProWeb
 
         protected void ReadFirstButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ENProduct pr = new ENProduct();
+                CADProduct product = new CADProduct();
+                product.ReadFirst(pr);
+                showProduct(pr);
+                Console.WriteLine("Done!!");
+                MsgLabel.Text = "Done!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
+            }
         }
 
         protected void ReadPrevButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
+                ENProduct pr = new ENProduct();
+                pr.Code = CodeTextBox.Text;
+                CADProduct product = new CADProduct();
+                product.ReadPrev(pr);
+                showProduct(pr);
+                Console.WriteLine("Done!!");
+                MsgLabel.Text = "Done!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
+            }
         }
 
         protected void ReadNextButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
+                ENProduct pr = new ENProduct();
+                pr.Code = CodeTextBox.Text;
+                CADProduct product = new CADProduct();
+                product.ReadNext(pr);
+                showProduct(pr);
+                Console.WriteLine("Done!!");
+                MsgLabel.Text = "Done!!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(errMsg + ex.Message);
+                MsgLabel.Text = errMsg + ex.Message;
+            }
         }
     }
 }
