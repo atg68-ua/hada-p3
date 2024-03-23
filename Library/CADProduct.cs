@@ -199,7 +199,7 @@ namespace Library
 
                 SqlCommand command = new SqlCommand(null, connection);
 
-                command.CommandText = "SELECT * FROM [dbo].[Products] ORDER BY id LIMIT 1";
+                command.CommandText = "SELECT * FROM [dbo].[Products] ORDER BY id";
 
                 command.Prepare();
                 SqlDataReader reader = command.ExecuteReader();
