@@ -58,8 +58,7 @@ namespace Library
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
@@ -107,8 +106,7 @@ namespace Library
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
@@ -140,8 +138,7 @@ namespace Library
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
@@ -182,8 +179,7 @@ namespace Library
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
@@ -217,8 +213,7 @@ namespace Library
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
@@ -257,12 +252,11 @@ namespace Library
                         found = true;
                 }
 
-                return false;
+                throw new Exception("There are no products next.");
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
@@ -302,7 +296,7 @@ namespace Library
                     prev.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
                 }
 
-                if (found)
+                if (found && !prev.IsEmpty())
                 {
                     en.Name = prev.Name;
                     en.Code = prev.Code;
@@ -312,12 +306,12 @@ namespace Library
                     en.CreationDate = prev.CreationDate;
                     return true;
                 }
-                return false;
+
+                throw new Exception("There are no previous products.");
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", ex.Message);
-                return false;
+                throw ex;
             }
             finally
             {
