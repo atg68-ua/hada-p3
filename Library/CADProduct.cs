@@ -238,27 +238,25 @@ namespace Library
 
                 command.Prepare();
                 SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-
                 bool found = false;
 
                 while (reader.Read())
                 {
+                    if (found)
+                    {
+                        en.Name = reader["name"].ToString();
+                        en.Code = reader["code"].ToString();
+                        en.Amount = int.Parse(reader["amount"].ToString());
+                        en.Price = float.Parse(reader["price"].ToString());
+                        en.Category = int.Parse(reader["category"].ToString());
+                        en.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
+                        return true;
+                    }
+
                     if (reader["code"].ToString() == en.Code)
                         found = true;
-                    break;
                 }
 
-                if (found && reader.Read())
-                {
-                    en.Name = reader["name"].ToString();
-                    en.Code = reader["code"].ToString();
-                    en.Amount = int.Parse(reader["amount"].ToString());
-                    en.Price = float.Parse(reader["price"].ToString());
-                    en.Category = int.Parse(reader["category"].ToString());
-                    en.CreationDate = DateTime.Parse(reader["creationDate"].ToString());
-                    return true;
-                }
                 return false;
             }
             catch (SqlException ex)
@@ -284,7 +282,6 @@ namespace Library
 
                 command.Prepare();
                 SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
 
                 ENProduct prev = new ENProduct();
                 bool found = false;
