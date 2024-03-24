@@ -22,7 +22,7 @@ namespace ProWeb
             NameTextBox.Text = pr.Name;
             AmountTextBox.Text = pr.Amount.ToString();
             PriceTextBox.Text = pr.Price.ToString();
-            CategoryList.SelectedIndex = pr.Category;
+            CategoryList.SelectedIndex = pr.Category-1;
             DateTextBox.Text = pr.CreationDate.ToString();
         }
         private ENProduct correctData(string code, string name, int amount, float price, string creationDate)
