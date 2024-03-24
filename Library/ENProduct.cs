@@ -51,7 +51,7 @@ namespace Library
             _amount = 0;
             _price = 0;
             _category = 0;
-            _creationDate = DateTime.Now;
+            _creationDate = new DateTime(1900,1,1,0,0,0);
         }
         public ENProduct(string code, string name, int amount, float price, int category, DateTime creationDate)
         {
@@ -96,6 +96,15 @@ namespace Library
         {
             CADProduct cadProduct = new CADProduct();
             return cadProduct.ReadPrev(this);
+        }
+        public bool IsEmpty()
+        {
+            return (_code == "00000" &&
+                    _name == "" &&
+                    _amount == 0 &&
+                    _price == 0 &&
+                    _category == 0 &&
+                    _creationDate == DateTime.Parse("01/01/1900 00:00:00"));
         }
     }
 }
