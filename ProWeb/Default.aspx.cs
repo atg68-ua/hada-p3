@@ -12,7 +12,7 @@ namespace ProWeb
     public partial class WebForm1 : System.Web.UI.Page
     {
         private const int MAX_CODE = 16;
-        private const int MAX_NAME = 16;
+        private const int MAX_NAME = 32;
         private const int MAX_AMOUNT = 9999;
         private const double MAX_PRICE = 9999.99;
         private const string errMsg = "User operation has failed. Error: ";
