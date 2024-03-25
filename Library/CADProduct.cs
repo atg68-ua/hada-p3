@@ -100,8 +100,8 @@ namespace Library
                 command.Parameters.Add(creationDateParam);
 
                 command.Prepare();
-                command.ExecuteNonQuery();
-                connection.Close();
+                if (command.ExecuteNonQuery() == 0)
+                    throw new Exception("There is no such product with the specified code.");
                 return true;
             }
             catch (SqlException ex)
@@ -132,8 +132,8 @@ namespace Library
                 command.Parameters.Add(codeParam);
 
                 command.Prepare();
-                command.ExecuteNonQuery();
-                connection.Close();
+                if (command.ExecuteNonQuery() == 0)
+                    throw new Exception("There is no such product with the specified code.");
                 return true;
             }
             catch (SqlException ex)
