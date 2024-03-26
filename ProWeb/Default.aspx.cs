@@ -57,8 +57,7 @@ namespace ProWeb
             try
             {
                 ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
-                CADProduct product = new CADProduct();
-                product.Create(pr);
+                pr.Create();
                 Console.WriteLine("Product created!!");
                 MsgLabel.Text = "Product created!!";
             }
@@ -74,8 +73,7 @@ namespace ProWeb
             try
             {
                 ENProduct pr = correctData(CodeTextBox.Text, NameTextBox.Text, int.Parse(AmountTextBox.Text), float.Parse(PriceTextBox.Text), DateTextBox.Text);
-                CADProduct product = new CADProduct();
-                product.Update(pr);
+                pr.Update();
                 Console.WriteLine("Product updated!!");
                 MsgLabel.Text = "Product updated!!";
             }
@@ -93,8 +91,7 @@ namespace ProWeb
                 if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
                 ENProduct pr = new ENProduct();
                 pr.Code = CodeTextBox.Text;
-                CADProduct product = new CADProduct();
-                product.Delete(pr);
+                pr.Delete();
                 Console.WriteLine("Product deleted!!");
                 MsgLabel.Text = "Product deleted!!";
             }
@@ -112,11 +109,10 @@ namespace ProWeb
                 if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
                 ENProduct pr = new ENProduct();
                 pr.Code = CodeTextBox.Text;
-                CADProduct product = new CADProduct();
-                product.Read(pr);
+                pr.Read();
                 showProduct(pr);
-                Console.WriteLine("Done!!");
-                MsgLabel.Text = "Done!!";
+                Console.WriteLine("The product has been read succesfully!!");
+                MsgLabel.Text = "The product has been read succesfully!!";
             }
             catch (Exception ex)
             {
@@ -130,11 +126,10 @@ namespace ProWeb
             try
             {
                 ENProduct pr = new ENProduct();
-                CADProduct product = new CADProduct();
-                product.ReadFirst(pr);
+                pr.ReadFirst();
                 showProduct(pr);
-                Console.WriteLine("Done!!");
-                MsgLabel.Text = "Done!!";
+                Console.WriteLine("The first product has been read succesfully!!");
+                MsgLabel.Text = "The first product has been read succesfully!!";
             }
             catch (Exception ex)
             {
@@ -150,11 +145,10 @@ namespace ProWeb
                 if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
                 ENProduct pr = new ENProduct();
                 pr.Code = CodeTextBox.Text;
-                CADProduct product = new CADProduct();
-                product.ReadPrev(pr);
+                pr.ReadPrev();
                 showProduct(pr);
-                Console.WriteLine("Done!!");
-                MsgLabel.Text = "Done!!";
+                Console.WriteLine("The previous product has been read succesfully!!");
+                MsgLabel.Text = "The previous product has been read succesfully!!";
             }
             catch (Exception ex)
             {
@@ -170,11 +164,10 @@ namespace ProWeb
                 if (CodeTextBox.Text.Length < 1 || CodeTextBox.Text.Length > MAX_CODE) throw new ArgumentException("incorrect code format");
                 ENProduct pr = new ENProduct();
                 pr.Code = CodeTextBox.Text;
-                CADProduct product = new CADProduct();
-                product.ReadNext(pr);
+                pr.ReadNext();
                 showProduct(pr);
-                Console.WriteLine("Done!!");
-                MsgLabel.Text = "Done!!";
+                Console.WriteLine("The following product has been read succesfully!!");
+                MsgLabel.Text = "The following product has been read succesfully!!";
             }
             catch (Exception ex)
             {
